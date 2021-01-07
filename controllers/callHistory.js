@@ -7,8 +7,7 @@ const callHistory = {
       let data;
       if (req.params.limit) {
         data = await CallHistory.find({}).limit(req.params.limit);
-      }
-      data = await CallHistory.find({}).limit(20);
+      } else data = await CallHistory.find({}).limit(20);
       res.status(200).send(data);
     } catch (e) {
       res.status(500);
@@ -16,7 +15,7 @@ const callHistory = {
   },
   post: async (req, res) => {
     const { error, value } = validate(req.body);
-    if (error !== undefined) {
+    if (error === undefined) {
       res.status(400);
       res.end();
     }
@@ -37,4 +36,4 @@ const callHistory = {
   },
 };
 
-export default callHistory;
+export { callHistory };

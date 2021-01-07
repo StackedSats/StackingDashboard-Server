@@ -9,4 +9,14 @@ const callHistoryValidation = (data) => {
   return schema.validate(data);
 };
 
-export { callHistoryValidation };
+const rewardHistoryValidation = (data) => {
+  const schema = Joi.object({
+    date: Joi.date(),
+    from: Joi.string(),
+    to: Joi.string(),
+    reward: Joi.number(),
+  });
+
+  return schema.validate(data);
+};
+export { callHistoryValidation, rewardHistoryValidation };
