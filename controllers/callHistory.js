@@ -1,5 +1,5 @@
-import { CallHistory } from "../models/";
-import { callHistoryValidation as validate } from "../validations/index";
+import { model as CallHistory } from "../models/index.js";
+import { callHistoryValidation as validate } from "../validations/index.js";
 
 const callHistory = {
   get: async (req, res) => {
@@ -30,7 +30,7 @@ const callHistory = {
       res.status(200).send(create);
       res.end();
     } catch (e) {
-      res.status(500);
+      res.status(500).send(e);
       res.end();
     }
   },

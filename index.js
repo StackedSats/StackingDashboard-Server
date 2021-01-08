@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import cors from "cors";
 import compression from "compression";
-import { normalizePort } from "./utils";
-import { rewardHistory, callHistory } from "./controllers/";
+import { normalizePort } from "./utils.js";
+import { rewardHistory, callHistory } from "./controllers/index.js";
 
 mongoose
-  .connect("mongodb://localhost:27017/", {
+  .connect("mongodb://localhost:27017/stackindashboard", {
     useNewUrlParser: true,
     autoReconnect: true,
   })
@@ -25,6 +25,7 @@ function shouldCompress(req, res) {
 
 const app = express();
 
+app.use(express.json());
 app.use(morgan("combined"));
 app.use(cors());
 app.use(compression({ filter: shouldCompress }));
@@ -44,5 +45,5 @@ app.post("/callHistory", callHistory.post);
 (function initServer() {
   // eslint-disable-next-line no-undef
   const port = normalizePort(process.env.PORT || "3000");
-  app.listen(port, () => console.log("Server up"));
+  app.listen(port, () => console.log("Server up on " + port));
 })();

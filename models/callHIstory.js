@@ -21,4 +21,4 @@ const schema = mongoose.Schema({
 });
 
 const model = mongoose.model("CallHistory", schema);
-export default model;
+export { model };

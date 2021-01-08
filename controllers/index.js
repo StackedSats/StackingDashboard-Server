@@ -1,4 +1,4 @@
-export * from "./callHistory";
-export * from "./rewardHistory";
+export * from "./callHistory.js";
+export * from "./rewardHistory.js";
 // export * from "./rewards";
 // export * from "./transfers";

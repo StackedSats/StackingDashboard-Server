@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import RewardModel from "../models/rewardHIstory";
+import RewardModel from "../models/rewardHIstory.js";
 
-import { rewardHistoryValidation } from "../validations";
+import { rewardHistoryValidation } from "../validations/index.js";
 
 const rewardHistory = {
   get: async (req, res) => {
@@ -22,7 +22,7 @@ const rewardHistory = {
   },
   post: async (req, res) => {
     const { error, result } = rewardHistoryValidation(req.body);
-
+    console.log(req.body);
     if (error === undefined) {
       res.status(400);
       res.end();
@@ -30,10 +30,11 @@ const rewardHistory = {
 
     try {
       const reward = await RewardModel.create(req.body);
+      console.log(reward);
       res.status(200).send(reward);
       res.end();
     } catch (e) {
-      res.status(500);
+      res.status(500).send(e);
       res.end();
     }
   },
