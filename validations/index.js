@@ -1,3 +1,4 @@
+import { JSONCookie } from "cookie-parser";
 import Joi from "joi";
 
 const callHistoryValidation = (data) => {
@@ -19,4 +20,13 @@ const rewardHistoryValidation = (data) => {
 
   return schema.validate(data);
 };
-export { callHistoryValidation, rewardHistoryValidation };
+
+const userValidation = (data) => {
+  const schema = Joi.object({
+    userName: Joi.string(),
+    password: Joi.string(),
+  });
+
+  return schema.validate(data);
+};
+export { callHistoryValidation, rewardHistoryValidation, userValidation };
