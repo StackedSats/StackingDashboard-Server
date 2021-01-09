@@ -1,3 +1,6 @@
+import bcrypt from "bcrypt";
+import { User } from "../models/index.js";
+
 const registration = async (req, res) => {
   let salt = await bcrypt.genSalt(10);
   let encyptedPass = await bcrypt.hash(req.body.password, salt);
