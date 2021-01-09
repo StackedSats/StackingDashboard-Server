@@ -10,12 +10,13 @@ import {
   callHistory,
   addresses,
   registration,
+  login,
+  btcAddressReward,
 } from "./controllers/index.js";
 import passport from "passport";
 import session from "express-session";
 import initializePassport from "./validations/passport-config.js";
 import flash from "express-flash";
-import bcrypt from "bcrypt";
 import { User } from "./models/index.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -46,6 +47,11 @@ function shouldCompress(req, res) {
 
 const app = express();
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(morgan("combined"));
+
+app.use(cors());
 app.use(flash());
 app.use(
   session({
@@ -55,35 +61,31 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(morgan("combined"));
-app.use(cors());
 app.use(compression({ filter: shouldCompress }));
 
-app.post(
-  "/login",
-  checkNotAuthenticated,
-  passport.authenticate("local", {
-    successRedirect: "/success",
-    failureRedirect: "/login",
-  })
-);
+app.post("/login", checkNotAuthenticated, login);
 
-app.get("/success", (req, res) => {
-  res.send("channel");
+app.delete("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/");
 });
 
-app.get("/login", (req, res) => {
-  res.send("login");
+app.get("/", (req, res) => {
+  res.send("dfjdnsf");
+});
+
+app.get("/notloggedin", (req, res) => {
+  res.send(false);
 });
 
 app.post("/register", checkNotAuthenticated, registration);
 
-app.get("/rewardHistory", rewardHistory.get);
+app.post("/btcAddressReward", btcAddressReward.post);
+app.put("/btcAddressReward", btcAddressReward.put);
+
+app.post("/rewardHistory", rewardHistory.get);
 app.post("/rewardHistory", rewardHistory.post);
 
-app.get("/addresses", addresses.get);
 app.post("/addresses", addresses.post);
 // app.get("/transfers", transfers.get);
 // app.post("/transfers", transfers.post);
@@ -131,6 +133,6 @@ function checkNotAuthenticated(req, res, next) {
 
 (function initServer() {
   // eslint-disable-next-line no-undef
-  const port = normalizePort(process.env.PORT || "3000");
+  const port = normalizePort(process.env.PORT || "4500");
   app.listen(port, () => console.log("Server up on " + port));
 })();

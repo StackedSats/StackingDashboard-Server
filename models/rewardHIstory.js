@@ -7,6 +7,6 @@ const schema = mongoose.Schema({
   reward: { type: Number, required: true },
 });
 
-const model = mongoose.model("rewardHistory", schema);
+const model = mongoose.model("rewardhistories", schema);
 
-export default model;
+export { model as rewardHistory };

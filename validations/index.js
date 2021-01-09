@@ -12,6 +12,7 @@ const callHistoryValidation = (data) => {
 
 const rewardHistoryValidation = (data) => {
   const schema = Joi.object({
+    username: Joi.string(),
     date: Joi.date(),
     from: Joi.string(),
     to: Joi.string(),
@@ -29,4 +30,5 @@ const userValidation = (data) => {
 
   return schema.validate(data);
 };
+
 export { callHistoryValidation, rewardHistoryValidation, userValidation };

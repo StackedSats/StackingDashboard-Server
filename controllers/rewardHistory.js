@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import RewardModel from "../models/rewardHIstory.js";
+import { rewardHistory as RewardModel } from "../models/index.js";
 
 import { rewardHistoryValidation } from "../validations/index.js";
 
