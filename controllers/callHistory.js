@@ -14,7 +14,7 @@ const callHistory = {
     }
   },
   post: async (req, res) => {
-    const { error, value } = validate(req.body);
+    const { error } = validate(req.body);
     if (error === undefined) {
       res.status(400);
       res.end();

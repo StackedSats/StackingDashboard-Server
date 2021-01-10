@@ -14,9 +14,9 @@ const addresses = {
   },
   post: async (req, res) => {
     const { username, stxAddress, btcAddress } = req.body;
-    console.log(req.body);
+
     const user = await User.findOne({ username });
-    console.log(user.stxAddress);
+
     if (user) {
       if (stxAddress) {
         const newset = new Set([...user.stxAddress, stxAddress]);

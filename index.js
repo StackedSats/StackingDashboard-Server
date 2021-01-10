@@ -83,7 +83,7 @@ app.post("/register", checkNotAuthenticated, registration);
 app.post("/btcAddressReward", btcAddressReward.post);
 app.put("/btcAddressReward", btcAddressReward.put);
 
-app.post("/rewardHistory", rewardHistory.get);
+app.get("/rewardHistory", rewardHistory.get);
 app.post("/rewardHistory", rewardHistory.post);
 
 app.post("/addresses", addresses.post);
