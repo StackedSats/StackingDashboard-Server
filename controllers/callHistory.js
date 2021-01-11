@@ -7,7 +7,7 @@ const callHistory = {
       let data;
       if (req.params.limit) {
         data = await CallHistory.find({}).limit(req.params.limit);
-      } else data = await CallHistory.find({}).limit(20);
+      } else data = await CallHistory.find({}).limit(10);
       res.status(200).send(data);
     } catch (e) {
       res.status(500);

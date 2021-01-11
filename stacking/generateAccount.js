@@ -8,7 +8,7 @@ import {
 import { StackingClient } from "@stacks/stacking";
 
 import { StacksTestnet } from "@stacks/network";
-import config from "../../config.js";
+import config from "../config.js";
 
 import BN from "bn.js";
 

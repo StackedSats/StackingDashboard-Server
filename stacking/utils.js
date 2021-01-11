@@ -1,20 +1,18 @@
 import client from "./generateAccount.js";
-import config from "../../config.js";
+import config from "../config.js";
 import { secondsUntilNextCycle, cycleDuration } from "./displayStaking.js";
 
 export async function isUserEligible() {
   const hasMinStxAmount = await client.hasMinimumStx();
-  console.log(hasMinStxAmount);
+  return hasMinStxAmount;
 }
 
-export async function numberOfCycles() {
+export function numberOfCycles() {
   let numberOfCycles = 3;
-  const unlockingAt = new Date(secondsUntilNextCycle);
-  console.log(unlockingAt);
+  const unlockingAt = new Date(new Date().getTime() + secondsUntilNextCycle);
   unlockingAt.setSeconds(
     unlockingAt.getSeconds() + cycleDuration * numberOfCycles
   );
-  console.log(unlockingAt);
 }
 
 export async function stackingEligibility() {
@@ -23,11 +21,12 @@ export async function stackingEligibility() {
   let numberOfCycles = 3;
 
   const stackingEligibility = await client.canStack({
-    btcAddress,
-    numberOfCycles,
+    poxAddress: btcAddress,
+    cycles: numberOfCycles,
   });
 
   console.log(stackingEligibility);
+  return stackingEligibility;
 
   // this assumes user is stacking is entire balance
 }
@@ -36,7 +35,8 @@ export async function getStatus() {
   const status = await client.getStatus();
   console.log(status);
 }
-isUserEligible();
-// numberOfCycles();
-// stackingEligibility();
-getStatus();
+
+// isUserEligible();
+// // numberOfCycles();
+stackingEligibility();
+// getStatus();

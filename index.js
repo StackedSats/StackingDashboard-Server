@@ -12,12 +12,14 @@ import {
   registration,
   login,
   btcAddressReward,
+  cycle,
 } from "./controllers/index.js";
 import passport from "passport";
 import session from "express-session";
 import initializePassport from "./validations/passport-config.js";
 import flash from "express-flash";
 import { User } from "./models/index.js";
+import { forgotPass } from "./controllers/forgotPass.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -47,6 +49,7 @@ function shouldCompress(req, res) {
 
 const app = express();
 
+app.use(express.static("build"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(morgan("combined"));
@@ -67,11 +70,11 @@ app.post("/login", checkNotAuthenticated, login);
 
 app.delete("/logout", (req, res) => {
   req.logOut();
-  res.redirect("/");
+  res.status(200).send("success");
 });
 
 app.get("/", (req, res) => {
-  res.send("dfjdnsf");
+  res.sendFile("index.html");
 });
 
 app.get("/notloggedin", (req, res) => {
@@ -80,11 +83,16 @@ app.get("/notloggedin", (req, res) => {
 
 app.post("/register", checkNotAuthenticated, registration);
 
+app.get("/forgotPassword/:id", forgotPass.get);
+app.post("/forgotPassword", forgotPass.post);
+
 app.post("/btcAddressReward", btcAddressReward.post);
 app.put("/btcAddressReward", btcAddressReward.put);
 
 app.get("/rewardHistory", rewardHistory.get);
 app.post("/rewardHistory", rewardHistory.post);
+
+app.get("/cycleInfo", cycle);
 
 app.post("/addresses", addresses.post);
 // app.get("/transfers", transfers.get);

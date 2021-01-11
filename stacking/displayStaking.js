@@ -2,19 +2,20 @@ import client from "./generateAccount.js";
 
 export async function stackingEnabledNextCycle() {
   const stackingEnabledNextCycle = await client.isStackingEnabledNextCycle();
-  console.log(stackingEnabledNextCycle);
+  return stackingEnabledNextCycle;
 }
 
 export async function cycleDuration() {
   const cycleDuration = await client.getCycleDuration();
-  console.log(cycleDuration);
+  return cycleDuration;
 }
 
 export async function secondsUntilNextCycle() {
   const secondsUntilNextCycle = await client.getSecondsUntilNextCycle();
-  console.log(secondsUntilNextCycle);
+  return secondsUntilNextCycle;
 }
 
-// const data1 = stackingEnabledNextCycle();
-// const data2 = cycleDuration();
-// const data3 = secondsUntilNextCycle();
+export async function targetBlockTime() {
+  const targetBlocktime = await client.getTargetBlockTime();
+  return targetBlocktime;
+}
