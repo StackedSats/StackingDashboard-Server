@@ -21,6 +21,9 @@ import flash from "express-flash";
 import { User } from "./models/index.js";
 import { forgotPass } from "./controllers/forgotPass.js";
 import dotenv from "dotenv";
+import BN from "bn.js";
+import { StackingClient } from "@stacks/stacking";
+import { StacksTestnet } from "@stacks/network";
 dotenv.config();
 
 initializePassport(
@@ -94,6 +97,7 @@ app.post("/rewardHistory", rewardHistory.post);
 
 app.get("/cycleInfo", cycle);
 
+app.delete("/addresses", addresses.delete);
 app.post("/addresses", addresses.post);
 // app.get("/transfers", transfers.get);
 // app.post("/transfers", transfers.post);

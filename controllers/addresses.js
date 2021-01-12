@@ -34,6 +34,29 @@ const addresses = {
       res.end();
     }
   },
+  delete: async (req, res) => {
+    const { username, stxAddress, btcAddress } = req.body;
+    console.log(req.body);
+    const user = await User.findOne({ username });
+
+    if (user) {
+      if (stxAddress) {
+        const newset = user.stxAddress.filter((value) => value != stxAddress);
+        user.stxAddress = newset;
+      }
+      if (btcAddress) {
+        const newset = user.btcAddress.filter((value) => value != btcAddress);
+        user.btcAddress = newset;
+      }
+      user.save();
+      console.log(user);
+      res.status(200).send(user);
+      res.end();
+    } else {
+      res.status(402);
+      res.end();
+    }
+  },
 };
 
 export { addresses };
