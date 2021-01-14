@@ -15,6 +15,8 @@ const schema = new mongoose.Schema({
   },
   stxAddress: [String],
   btcAddress: [String],
+  totalBTCReward: { type: Number, default: 0 },
+  pendingBTCReward: { type: Number, default: 0 },
 });
 
 schema.methods.generateAuthToken = function () {

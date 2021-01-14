@@ -5,5 +5,5 @@ export * from "./registration.js";
 export * from "./login.js";
 export * from "./btcAddressReward.js";
 export * from "./cycle.js";
-// export * from "./rewards";
+export * from "./btcClaim.js";
 // export * from "./transfers";

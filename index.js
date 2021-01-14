@@ -13,6 +13,7 @@ import {
   login,
   btcAddressReward,
   cycle,
+  btcClaim,
 } from "./controllers/index.js";
 import passport from "passport";
 import session from "express-session";
@@ -21,9 +22,8 @@ import flash from "express-flash";
 import { User } from "./models/index.js";
 import { forgotPass } from "./controllers/forgotPass.js";
 import dotenv from "dotenv";
-import BN from "bn.js";
-import { StackingClient } from "@stacks/stacking";
-import { StacksTestnet } from "@stacks/network";
+import { transactionRecord } from "./controllers/transactionRecord.js";
+
 dotenv.config();
 
 initializePassport(
@@ -99,11 +99,10 @@ app.get("/cycleInfo", cycle);
 
 app.delete("/addresses", addresses.delete);
 app.post("/addresses", addresses.post);
-// app.get("/transfers", transfers.get);
-// app.post("/transfers", transfers.post);
 
-// app.get("/rewards", rewards.get);
-// app.post("/rewards", rewards.post);
+app.post("/transactionRecords", transactionRecord);
+
+app.post("/btcClaim", btcClaim);
 
 app.get("/callHistory", callHistory.get);
 app.post("/callHistory", callHistory.post);
