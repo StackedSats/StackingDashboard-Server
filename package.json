@@ -13,10 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "@stacks/blockchain-api-client": "^0.38.1",
-    "@stacks/network": "^1.0.0-beta.20",
-    "@stacks/stacking": "^1.0.0-beta.20",
+    "@stacks/network": "^1.0.2",
+    "@stacks/stacking": "^1.1.0",
     "bcrypt": "^5.0.0",
     "bn.js": "^4.11.6",
+    "buffer": "^6.0.3",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -32,6 +33,7 @@
     "nodemailer": "^6.4.17",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "pdfkit": "^0.11.0",
     "stxcalculator": "^1.0.10"
   },
   "devDependencies": {

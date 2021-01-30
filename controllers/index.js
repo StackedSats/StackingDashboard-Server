@@ -6,4 +6,5 @@ export * from "./login.js";
 export * from "./btcAddressReward.js";
 export * from "./cycle.js";
 export * from "./btcClaim.js";
-// export * from "./transfers";
+export * from "./getUserClaimedRewardGraph.js";
+export * from "./dailyBtcReward.js";

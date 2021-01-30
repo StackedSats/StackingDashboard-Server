@@ -14,6 +14,8 @@ import {
   btcAddressReward,
   cycle,
   btcClaim,
+  getUserClaimedRewardsGraph,
+  dailyBtcReward,
 } from "./controllers/index.js";
 import passport from "passport";
 import session from "express-session";
@@ -23,6 +25,8 @@ import { User } from "./models/index.js";
 import { forgotPass } from "./controllers/forgotPass.js";
 import dotenv from "dotenv";
 import { transactionRecord } from "./controllers/transactionRecord.js";
+import PDFDocument from "pdfkit";
+import { Buffer } from "buffer";
 
 dotenv.config();
 
@@ -53,7 +57,7 @@ function shouldCompress(req, res) {
 const app = express();
 
 app.use(express.static("build"));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false, useFinAndModify: true }));
 app.use(express.json());
 app.use(morgan("combined"));
 
@@ -96,16 +100,39 @@ app.get("/rewardHistory", rewardHistory.get);
 app.post("/rewardHistory", rewardHistory.post);
 
 app.get("/cycleInfo", cycle);
+app.post("/getUserClaimedRewardsGraph", getUserClaimedRewardsGraph);
 
 app.delete("/addresses", addresses.delete);
 app.post("/addresses", addresses.post);
 
 app.post("/transactionRecords", transactionRecord);
 
+app.post("/dailyBTCReward", dailyBtcReward);
 app.post("/btcClaim", btcClaim);
 
+app.post("/");
 app.get("/callHistory", callHistory.get);
 app.post("/callHistory", callHistory.post);
+
+app.get("/generatePDF", async function (req, res) {
+  var myDoc = new PDFDocument({ bufferPages: true });
+
+  let buffers = [];
+  myDoc.on("data", buffers.push.bind(buffers));
+  myDoc.on("end", () => {
+    let pdfData = Buffer.concat(buffers);
+    res
+      .writeHead(200, {
+        "Content-Length": Buffer.byteLength(pdfData),
+        "Content-Type": "application/pdf",
+        "Content-disposition": "attachment;filename=test.pdf",
+      })
+      .end(pdfData);
+  });
+
+  myDoc.font("Times-Roman").fontSize(12).text(`this is a test text`);
+  myDoc.end();
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

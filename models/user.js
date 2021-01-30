@@ -15,6 +15,7 @@ const schema = new mongoose.Schema({
   },
   stxAddress: [String],
   btcAddress: [String],
+  totalStacked: { type: Number, default: 0 },
   totalBTCReward: { type: Number, default: 0 },
   pendingBTCReward: { type: Number, default: 0 },
 });

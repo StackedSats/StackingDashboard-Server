@@ -1,11 +1,15 @@
 import { BtcRewardGraphs } from "../models/claimRewardsGraph.js";
 
 const btcClaim = async (req, res) => {
-  const { username, reward } = req.body;
+  const { username } = req.body;
 
-  const claim = await BtcRewardGraphs.find({ username });
+  try {
+    const claim = await BtcRewardGraphs.find({ username });
 
-  res.status(200).send(claim);
+    res.status(200).send(claim);
+  } catch (e) {
+    res.status(500).send(e);
+  }
 };
 
-export { btcClaim };
+export { btcClaim as getUserClaimedRewardsGraph };

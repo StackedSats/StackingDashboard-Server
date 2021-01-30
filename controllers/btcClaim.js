@@ -3,7 +3,7 @@ import { btcClaim as BTCClaim } from "../models/btcClaim.js";
 const btcClaim = async (req, res) => {
   const { username, btcAddress } = req.body;
 
-  const claim = await BTCClaim.findOneAsync(
+  const claim = await BTCClaim.findOneAndUpdate(
     { username },
     {
       $push: { btcAddress },

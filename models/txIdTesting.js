@@ -5,6 +5,6 @@ const schema = mongoose.Schema({
   txids: [{ delegateStx: String, delegateStxLock: String }],
 });
 
-const model = mongoose.model("pending", schema);
+const model = mongoose.model("txIds", schema);
 
 export { model as txIdTesting };

@@ -34,9 +34,10 @@ export async function stackingEligibility() {
 export async function getStatus() {
   const status = await client.getStatus();
   console.log(status);
+  return status;
 }
 
 // isUserEligible();
 // // numberOfCycles();
-stackingEligibility();
+// stackingEligibility();
 // getStatus();
