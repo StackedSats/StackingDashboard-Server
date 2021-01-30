@@ -4,7 +4,7 @@ const btcClaim = async (req, res) => {
   const { username } = req.body;
 
   try {
-    const claim = await BtcRewardGraphs.find({ username });
+    const claim = await BtcRewardGraphs.findOne({ username });
 
     res.status(200).send(claim);
   } catch (e) {

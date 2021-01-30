@@ -18,6 +18,7 @@ const btcAddressReward = {
         .lean()
         .exec();
 
+      console.log(list);
       res.status(200).send(list);
       res.end();
     } catch (e) {

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const schema = mongoose.Schema({
   username: String,
-  btcAddress: [String],
+  btcAddress: [{ btcAddress: String, value: Number }],
 });
 
 const model = mongoose.model("pending", schema);
