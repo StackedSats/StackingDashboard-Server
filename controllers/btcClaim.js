@@ -30,16 +30,16 @@ const btcClaim = async (req, res) => {
 
     res.status(200).send(claim);
   } else {
-    console.log(btcAddress);
-    const claim = await BTCClaim.findOneAndUpdate(
-      { username },
-      {
-        $push: {
-          btcAddress: { btcAddress: btcAddress, value: 4485 },
-        },
-      },
-      { new: true, upsert: true }
-    );
+    // console.log(btcAddress);
+    // const claim = await BTCClaim.findOneAndUpdate(
+    //   { username },
+    //   {
+    //     $push: {
+    //       btcAddress: { btcAddress: btcAddress, value: 4485 },
+    //     },
+    //   },
+    //   { new: true, upsert: true }
+    // );
 
     res.status(405).send("not stacked");
     res.end();
