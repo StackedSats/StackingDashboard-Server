@@ -16,9 +16,14 @@ const tx = new TransactionsApi(apiConfig);
 
 let txid = "";
 
-async function getCoreInfo() {
-  const coreInfo = await client.getCoreInfo();
-  return coreInfo.burn_block_height;
+export async function getCoreInfo() {
+  try {
+    const coreInfo = await client.getCoreInfo();
+    console.log(coreInfo, "coreinfo");
+    return coreInfo.burn_block_height;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export async function lockStxToStack() {
@@ -64,5 +69,3 @@ export async function waitTransaction(txId) {
   const resp = await waitForTransactionSuccess(txId);
   console.log(resp);
 }
-
-lockStxToStack();
