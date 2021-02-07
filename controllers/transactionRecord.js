@@ -4,10 +4,10 @@ import { delegateStx } from "../stacking/delegateAndCommit.js";
 
 const transactionRecord = async (req, res) => {
   const { username, amountSTX, stacker } = req.body;
-
+  console.log(stacker.testnet);
   try {
     const delegateConfirm = await delegateStx({
-      address: stacker,
+      address: stacker.testnet,
       amount: amountSTX,
     });
     console.log("delegates ...");

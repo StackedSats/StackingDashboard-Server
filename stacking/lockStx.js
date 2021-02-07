@@ -19,7 +19,6 @@ let txid = "";
 export async function getCoreInfo() {
   try {
     const coreInfo = await client.getCoreInfo();
-    console.log(coreInfo, "coreinfo");
     return coreInfo.burn_block_height;
   } catch (e) {
     console.log(e);
