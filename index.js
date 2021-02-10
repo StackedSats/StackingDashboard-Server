@@ -148,14 +148,13 @@ function checkAuthenticated(req, res, next) {
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return res.send("/success");
+    res.send("/success");
   }
 
   next();
 }
 
-(function initServer() {
-  // eslint-disable-next-line no-undef
-  const port = normalizePort(process.env.PORT || "4500");
-  app.listen(port, () => console.log("Server up on " + port));
-})();
+const port = normalizePort(process.env.PORT || "4500");
+const server = app.listen(port, () => console.log("Server up on " + port));
+
+export default server;
