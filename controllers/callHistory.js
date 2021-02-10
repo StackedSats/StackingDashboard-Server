@@ -23,6 +23,12 @@ const callHistory = {
     }
     const { functionName, stxAddress, fee } = req.body;
     try {
+      console.log({
+        functionName,
+        stxAddress,
+        fee,
+        date: Date.now(),
+      });
       const create = await CallHistory.create({
         functionName,
         stxAddress,

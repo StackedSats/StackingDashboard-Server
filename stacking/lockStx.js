@@ -22,6 +22,7 @@ export async function getCoreInfo() {
     return coreInfo.burn_block_height;
   } catch (e) {
     console.log(e);
+    throw "CoreInfo Error";
   }
 }
 

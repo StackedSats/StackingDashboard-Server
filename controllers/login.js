@@ -2,8 +2,10 @@ import passport from "passport";
 import { User } from "../models/index.js";
 
 const login = (req, res, next) => {
+  console.log(req.body);
   passport.authenticate("local", (err, user, info) => {
     if (err) {
+      console.log(err);
       return next(err);
     }
     if (!user) {

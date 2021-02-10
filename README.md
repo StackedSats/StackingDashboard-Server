@@ -16,7 +16,9 @@
 
 > Note: Email and password should be from gmail.com. 2FA and less secure login should be setuped. https://myaccount.google.com/lesssecureapps and https://support.google.com/accounts/answer/1064203 .
 
-### Usage
+## Setup Method 1: Using standalone NodeJS
+
+#### Usage
 
 > Spin up your mongoDB instance. For ubuntu : https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
@@ -31,6 +33,15 @@
 ```
 - npm i -g pm2
 - pm2 start index.js
+```
+
+## Setup Method: Using Docker and Docker-Compose:
+
+#### Running Using Docker
+
+```
+- chmod +x docker.sh
+- DockerFile
 ```
 
 ### LICENCE

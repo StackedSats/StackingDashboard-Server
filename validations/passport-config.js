@@ -8,7 +8,8 @@ async function initialize(passport, getUser, getUserById) {
     if (user == null) {
       return done(null, false, { message: "No user with that username" });
     }
-
+    console.log(user.password);
+    console.log(await bcrypt.compare(password, user.password));
     try {
       if (
         // password === user.password

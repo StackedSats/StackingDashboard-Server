@@ -14,6 +14,7 @@ import {
   btcAddressReward,
   cycle,
   btcClaim,
+  generateCSV,
   getUserClaimedRewardsGraph,
   dailyBtcReward,
 } from "./controllers/index.js";
@@ -27,6 +28,7 @@ import dotenv from "dotenv";
 import { transactionRecord } from "./controllers/transactionRecord.js";
 import PDFDocument from "pdfkit";
 import { Buffer } from "buffer";
+import auth from "./validations/auth.js";
 
 dotenv.config();
 
@@ -46,6 +48,8 @@ mongoose
   .catch(() => {
     console.log("Failed to connect to the database");
   });
+
+mongoose.set("debug", true);
 
 function shouldCompress(req, res) {
   if (req.headers["x-no-compression"]) {
@@ -105,34 +109,15 @@ app.post("/getUserClaimedRewardsGraph", getUserClaimedRewardsGraph);
 app.delete("/addresses", addresses.delete);
 app.post("/addresses", addresses.post);
 
-app.post("/transactionRecords", transactionRecord);
+app.post("/transactionRecords", auth, transactionRecord);
 
 app.post("/dailyBTCReward", dailyBtcReward);
-app.post("/btcClaim", btcClaim);
+app.post("/btcClaim", auth, btcClaim);
 
-app.post("/");
 app.get("/callHistory", callHistory.get);
 app.post("/callHistory", callHistory.post);
 
-app.get("/generatePDF", async function (req, res) {
-  var myDoc = new PDFDocument({ bufferPages: true });
-
-  let buffers = [];
-  myDoc.on("data", buffers.push.bind(buffers));
-  myDoc.on("end", () => {
-    let pdfData = Buffer.concat(buffers);
-    res
-      .writeHead(200, {
-        "Content-Length": Buffer.byteLength(pdfData),
-        "Content-Type": "application/pdf",
-        "Content-disposition": "attachment;filename=test.pdf",
-      })
-      .end(pdfData);
-  });
-
-  myDoc.font("Times-Roman").fontSize(12).text(`this is a test text`);
-  myDoc.end();
-});
+app.get("/generateCSV/:id", auth, generateCSV);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
