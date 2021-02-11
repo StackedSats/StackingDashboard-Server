@@ -84,10 +84,6 @@ app.delete("/logout", (req, res) => {
   res.status(200).send("success");
 });
 
-app.get("/*", (req, res) => {
-  res.sendFile("index.html");
-});
-
 app.get("/notloggedin", (req, res) => {
   res.send(false);
 });
@@ -118,6 +114,10 @@ app.get("/callHistory", callHistory.get);
 app.post("/callHistory", callHistory.post);
 
 app.get("/generateCSV/:id", auth, generateCSV);
+
+app.get("/*", (req, res) => {
+  res.sendFile("index.html");
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
