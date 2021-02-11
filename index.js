@@ -84,7 +84,7 @@ app.delete("/logout", (req, res) => {
   res.status(200).send("success");
 });
 
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile("index.html");
 });
 
