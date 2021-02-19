@@ -5,12 +5,14 @@ import axios from "axios";
 
 const transactionRecord = async (req, res) => {
   const { username, amountSTX, stacker, txId } = req.body;
+  console.log(username, amountSTX, stacker, txId);
   const check = setInterval(async () => {
     const status = await axios.get(
       `https://stacks-node-api.testnet.stacks.co/extended/v1/tx/${txId}`
     );
     if (status.data.tx_status === "success") {
       try {
+        console.log("fsdfsdfsdf3333333333");
         const delegateConfirm = await delegateStx({
           address: stacker.testnet,
           amount: amountSTX,
