@@ -1,6 +1,6 @@
 # StackedStats Backend Server
 
-### Prerequistics
+### Prerequisites
 
 - Volta installed <a href="https://docs.volta.sh/guide/">Link</a>
 - node > 12.0 <a href="https://nodejs.org/en/download/" target="_blank">Link</a>
@@ -44,11 +44,11 @@
 - DockerFile
 ```
 
-### LICENCE
+### LICENSE
 
 This project is GNU Public licenced.
 
-### Architectre overview
+### Architecture overview
 
 - Database: MongoDB
 - Server: NodeJS
