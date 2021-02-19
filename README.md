@@ -74,5 +74,5 @@ This project is GNU Public licenced.
 +-- stacking
 | +-- All scripts related to stacking
 +-- README.md
-+-- LICENCE
++-- LICENSE
 +-- .env
